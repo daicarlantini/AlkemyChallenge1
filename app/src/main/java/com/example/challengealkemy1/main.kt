@@ -3,6 +3,8 @@ package com.example.challengealkemy1
 import java.util.*
 
 
+val parking = Parking(mutableSetOf())
+
 fun main() {
     val car1 = Vehicle("AA111AA", VehicleType.CAR, Calendar.getInstance(), "DISCOUNT_CAR_001")
     val car2 = Vehicle("B222BBB", VehicleType.CAR, Calendar.getInstance())
@@ -26,7 +28,8 @@ fun main() {
     val car20 = Vehicle("B222BBB16", VehicleType.CAR, Calendar.getInstance())
     val car21 = Vehicle("B222BBB17", VehicleType.CAR, Calendar.getInstance())
 
-    val parking = Parking(mutableSetOf())
+
+
     parking.addVehicle(car1)
     parking.addVehicle(car2)
     parking.addVehicle(car3)
@@ -44,10 +47,12 @@ fun main() {
     parking.addVehicle(car15)
     parking.addVehicle(car16)
     parking.addVehicle(car17)
-    parking.addVehicle(car18)
-    parking.addVehicle(car19)
-    println(parking.addVehicle(car20))
-    println(parking.addVehicle(car21))
+    println(parking.addVehicle(car18))
+    println(addVehicleAndShowMessage(car19))
+    println(addVehicleAndShowMessage(car20))
+    println(addVehicleAndShowMessage(car21))
+
+
 /*
     val parking = Parking(mutableSetOf(car, car, car2))
     val iscar2Inserted = parking.vehicles.add(car2)
@@ -57,4 +62,12 @@ fun main() {
     println(parking.vehicles.contains(car))
     println(parking.vehicles.contains(car))
 */
+}
+
+//Function to display a message depending on the result of the "addVehicle" function
+fun addVehicleAndShowMessage(vehicle: Vehicle): String {
+    return when (parking.addVehicle(vehicle)) {
+        true -> "Welcome to Alkeparking"
+        false -> "Sorry, the check-in Failed"
+    }
 }

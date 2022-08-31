@@ -9,4 +9,5 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
             true
         } else false
     }
+
 }
