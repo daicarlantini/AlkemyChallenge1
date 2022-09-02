@@ -2,6 +2,14 @@ package com.example.challengealkemy1
 
 import java.util.*
 
+
+const val MINUTES_IN_MILLISECONDS = 60000L
+const val TWO_HOURS_IN_MINUTES = 120
+const val FIFTEEN_MINUTES = 15
+const val PRICE_FOR_FIFTEEN_MINUTES = 5
+const val DISCOUNT_PERCENTAGE = 0.15
+
+
 data class ParkingSpace(var vehicle: Vehicle) {
 
 
@@ -9,7 +17,6 @@ data class ParkingSpace(var vehicle: Vehicle) {
         get() {
             return (Calendar.getInstance().timeInMillis - vehicle.checkInTime.timeInMillis) / MINUTES_IN_MILLISECONDS
         }
-
 
     //function that calculates the fee for the Vehicle type passed checking if it has discount card
     fun calculateFee(type: VehicleType, discountCard: String?): Int {
@@ -28,13 +35,6 @@ data class ParkingSpace(var vehicle: Vehicle) {
     }
 
 }
-
-
-const val MINUTES_IN_MILLISECONDS = 60000L
-const val TWO_HOURS_IN_MINUTES = 120
-const val FIFTEEN_MINUTES = 15
-const val PRICE_FOR_FIFTEEN_MINUTES = 5
-const val DISCOUNT_PERCENTAGE = 0.15
 
 
 

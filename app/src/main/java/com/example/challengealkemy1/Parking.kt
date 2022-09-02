@@ -1,6 +1,8 @@
 package com.example.challengealkemy1
 
 
+const val MAX_SIZE_SET = 19
+
 data class Parking(val vehicles: MutableSet<Vehicle>) {
     private val count: Int = 0
     private val amount: Int = 0
@@ -9,7 +11,7 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
 
     // Function that checks if a car can be added to the parking lot
     fun addVehicle(vehicle: Vehicle): Boolean {
-        return if (vehicles.size <= 19 && !vehicles.contains(vehicle)) {
+        return if (vehicles.size <= MAX_SIZE_SET && !vehicles.contains(vehicle)) {
             vehicles.add(vehicle)
             showCheckInMessage(true)
             true
@@ -46,9 +48,7 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
     }
 
     private fun onSuccess(fee: Int) {
-        parkingHistory
         println("Your fee is $fee. Come back soon")
-
     }
 
     private fun onError() {
