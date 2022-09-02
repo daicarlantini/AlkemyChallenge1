@@ -1,7 +1,6 @@
 package com.example.challengealkemy1
 
 
-
 data class Parking(val vehicles: MutableSet<Vehicle>) {
     private val count: Int = 0
     private val amount: Int = 0
@@ -12,29 +11,28 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
     fun addVehicle(vehicle: Vehicle): Boolean {
         return if (vehicles.size <= 19 && !vehicles.contains(vehicle)) {
             vehicles.add(vehicle)
-            successAddVehicle()
+            showCheckInMessage(true)
             true
         } else {
-            errorAddVehicle()
+            showCheckInMessage(false)
             false
         }
-
     }
 
-    private fun successAddVehicle() {
-        println("Welcome to Alkeparking")
+    private fun showCheckInMessage(result: Boolean) {
+        when(result){
+            true -> println("Welcome to Alkeparking")
+            false -> println("Sorry, the check-in Failed")
+        }
     }
 
-    private fun errorAddVehicle() {
-        println("Sorry, the check-in Failed")
-    }
-
-
+    //Function that checks if a vehicle is in the parking lot or not
     private fun checkOutVehicle(vehicle: Vehicle): Boolean {
         val foundVehicle = vehicles.find { it.plate == vehicle.plate }
         return foundVehicle != null
     }
 
+    //Function that remove vehicle from set and calls two functions: calculateFee and updateHistory
     fun removeVehicle(vehicle: Vehicle) {
         if (checkOutVehicle(vehicle)) {
             val parkingSpace = ParkingSpace(vehicle)
@@ -47,26 +45,6 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
         }
     }
 
-    fun listVehicles() {
-        println("Plate in Parking :")
-        vehicles.toList().forEach {
-            println(it.plate)
-        }
-    }
-
-
-    private fun updateHistory(fee: Int) {
-        parkingHistory = parkingHistory.copy(
-            first = parkingHistory.first.plus(1),
-            second = parkingHistory.second.plus(fee)
-        )
-
-    }
-
-    fun showHistory() {
-        println("${parkingHistory.first} vehicles have checked out and have earnings of ${parkingHistory.second} ")
-    }
-
     private fun onSuccess(fee: Int) {
         parkingHistory
         println("Your fee is $fee. Come back soon")
@@ -77,7 +55,27 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
         println("Sorry , the check out failed")
     }
 
-//ejercicio 10
+    //Function that makes a list of parking vehicles
+    fun listVehicles() {
+        println("Plates in Parking :")
+        vehicles.toList().forEach {
+            println(it.plate)
+        }
+    }
+
+    //Function that updates the Pair with the number of cars and the money collected
+    private fun updateHistory(fee: Int) {
+        parkingHistory = parkingHistory.copy(
+            first = parkingHistory.first.plus(1),
+            second = parkingHistory.second.plus(fee)
+        )
+
+    }
+
+    //Function that shows the parkingHistory data
+    fun showHistory() {
+        println("${parkingHistory.first} vehicles have checked out and have earnings of ${parkingHistory.second} ")
+    }
 
 
 }
