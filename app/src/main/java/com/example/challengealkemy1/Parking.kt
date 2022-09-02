@@ -37,7 +37,7 @@ data class Parking(val vehicles: MutableSet<Vehicle>) {
         if (checkOutVehicle(vehicle)) {
             val parkingSpace = ParkingSpace(vehicle)
             vehicles.remove(vehicle)
-            val fee = parkingSpace.calculateFee()
+            val fee = parkingSpace.calculateFee(vehicle.type, vehicle.discountCard)
             updateHistory(fee)
             onSuccess(fee)
         } else {
